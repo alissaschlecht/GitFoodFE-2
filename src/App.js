@@ -2,25 +2,22 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import ListDishes from './pages/ListDishes';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import './App.scss';
 
 function App() {
   return (
-    <>
-    <Header />
     <Router>
+      <Header />
       <Switch>
-        <Route path="/">
-          <ListDishes />
-        </Route>
+        <Route path="/" component={ListDishes} />
       </Switch>
+      <Footer/>
     </Router>
-    </>
   );
 }
 

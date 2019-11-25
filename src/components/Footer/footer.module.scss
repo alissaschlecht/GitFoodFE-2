@@ -1,0 +1,18 @@
+@import '../../utils/utils.scss';
+
+.footer {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-top: 1px solid $color-secondary;
+  font-size: $font-size-footer;
+
+  .img {
+    width: $spacing-small;
+    padding: $spacing-x-small;
+  }
+}
