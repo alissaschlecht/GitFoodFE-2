@@ -12,7 +12,7 @@ class ListDishes extends Component {
     super(props);
     this.state = {
       dishes: null,
-      filteredDishes: null,
+      value: '',
       isLoading: false,
     }
   }
@@ -21,26 +21,21 @@ class ListDishes extends Component {
     this.setState({ isLoading: true });
     fetch(url)
     .then(response => response.json())
-    .then(json => this.setState({ dishes: json.dishes, filteredDishes: json.dishes, isLoading: false }));
+    .then(json => this.setState({ dishes: json.dishes, isLoading: false }));
   }
 
   onChange = (e) => {
-    let value = e.target.value.toLowerCase();
-    if(value) {
-      let matchingDishes = this.state.dishes.filter(dish => dish.name.toLowerCase().includes(value));
-      this.setState({ filteredDishes: matchingDishes });
-    } else {
-      this.setState({ filteredDishes: this.state.dishes });
-    }
-
-    
-
+    this.setState({ value: e.target.value.toLowerCase() });
   }
-  
+
+  deleteDish = (id) => {
+    //TODO: add fetch method to delete
+    console.log(`${url}/${id}`);
+  }
 
   render() {
     
-    const { dishes, filteredDishes, isLoading } = this.state;
+    const { dishes, value, isLoading } = this.state;
 
     return(
       <div className={styles['list-dishes']}>
@@ -59,7 +54,11 @@ class ListDishes extends Component {
 
         { isLoading 
           ? <p>Loading...</p> 
-          : <List dishes={filteredDishes} />
+          : <List
+              deleteDish={this.deleteDish}
+              dishes={ value === '' 
+              ? dishes 
+              : dishes.filter(dish => dish.name.toLowerCase().includes(value))} />
         }
 
       </div>

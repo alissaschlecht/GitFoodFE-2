@@ -4,8 +4,10 @@ import Button from '../../../../components/Button';
 import Logo from '../../../../components/Logo';
 import styles from '../../listDishes.module.scss';
 
-const List = ({dishes}) => {
-
+const List = (props) => {
+  console.log('props',props);
+  const { dishes, deleteDish } = props;
+  
   return (
     <div className={styles['list-container']}>
       { dishes
@@ -16,7 +18,7 @@ const List = ({dishes}) => {
             <h5>Actions</h5>
           </div>
           {dishes.map( (dish, index) => 
-            <Dish dish={dish} key={index} />
+            <Dish dish={dish} key={index}  deleteDish={deleteDish} />
           )}
           </>
         : <>
