@@ -5,8 +5,8 @@ import Logo from '../../../../components/Logo';
 import styles from '../../listDishes.module.scss';
 
 const List = (props) => {
-  console.log('props',props);
-  const { dishes, deleteDish } = props;
+
+  const { dishes, deleteDish, editDishName } = props;
   
   return (
     <div className={styles['list-container']}>
@@ -18,7 +18,11 @@ const List = (props) => {
             <h5>Actions</h5>
           </div>
           {dishes.map( (dish, index) => 
-            <Dish dish={dish} key={index}  deleteDish={deleteDish} />
+            <Dish 
+              dish={dish} 
+              key={index}  
+              deleteDish={deleteDish} 
+              editDishName={editDishName} />
           )}
           </>
         : <>
