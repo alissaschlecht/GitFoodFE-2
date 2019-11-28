@@ -28,12 +28,10 @@ class ListDishes extends Component {
     fetch(url)
     .then(response => response.json())
     .then(response => {
-      console.log('response', response.dishes[0]); 
       return response;
     })
     .then(json => this.setState({ dishes: json.dishes, isLoading: false }));
   }
-
 
   searchDishes = (e) => {
     this.setState({ searchValue: e.target.value.toLowerCase() });
@@ -48,7 +46,7 @@ class ListDishes extends Component {
     this.setState({ modalIsOpen: true, editDish: dish });
   }
 
-  updateDishName = (e) => {
+  editDishName = (e) => {
     this.setState({ newDishname: e.target.value })
   }
 
@@ -56,7 +54,7 @@ class ListDishes extends Component {
     this.setState({ modalIsOpen: false });
   }
 
-  editName = () => {
+  updateDishName = () => {
 
     const updatedDish = this.state.editDish;
     updatedDish.name = this.state.newDishname;
@@ -119,13 +117,13 @@ class ListDishes extends Component {
               type="text" 
               placeholder={editDish.name} 
               value={newDishname} 
-              onChange={this.updateDishName} />
+              onChange={this.editDishName} />
             <Button 
               title="Close" 
               onClick={this.closeModal} />
             <Button 
               title="Save" 
-              onClick={this.editName} />
+              onClick={this.updateDishName} />
           </form>
         </Modal>
 
