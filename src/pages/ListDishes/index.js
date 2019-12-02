@@ -82,7 +82,6 @@ class ListDishes extends Component {
   }
 
   render() {
-    console.log(this.state.dishes);
     const { dishes, searchValue, isLoading, editDish, newDishname } = this.state;
 
     return(
