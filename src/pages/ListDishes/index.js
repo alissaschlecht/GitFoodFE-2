@@ -38,8 +38,14 @@ class ListDishes extends Component {
   }
 
   deleteDish = id => {
-    //TODO: add fetch method to delete
-    console.log(`${url}/${id}`);
+    fetch(`${url}/${id}`, {
+      method: 'DELETE'
+    }).then(() => {
+      const newArr = this.state.dishes.filter(dish => dish.id !== id );
+      this.setState({ dishes: newArr });
+    }).catch(err => {
+      console.log(err);
+    })
   }
 
   openModal = dish => {
@@ -76,7 +82,7 @@ class ListDishes extends Component {
   }
 
   render() {
-    
+    console.log(this.state.dishes);
     const { dishes, searchValue, isLoading, editDish, newDishname } = this.state;
 
     return(

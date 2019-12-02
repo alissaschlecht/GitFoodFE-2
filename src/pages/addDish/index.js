@@ -1,64 +1,92 @@
 import React, { Component } from 'react';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-import styles from './addDish.module.scss';
+import ListIngredients from './components/ListIngredients';
+import ListInstructions from './components/ListInstructions';
+import AddIngredient from './components/AddIngredient';
+import AddInstruction from './components/AddInstruction';
+import { withRouter } from 'react-router-dom';
+// import styles from './addDish.module.scss';
 
 const url = "https://git-food-api.herokuapp.com/api/dishes";
 
 class addDish extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      dish: {
-        name: 'test',
-        version: {
-          versionNumber: 1,
-          ingredients: [
-            {
-              name: 'test ingredient',
-              quantity: 1,
-              measurement: 'test measurement'
-            }
-          ],
-          instructions: [
-            {
-              stepNumber: 1,
-              description: 'test description'
-            }
-          ],
-        }
-      }
+      name: '',
+      ingredients: [],
+      instructions: [],
     }
   }
 
-  submit = () => {
-    console.log(this.state);
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const data = {
+      dish: {
+        name: this.state.name,
+        versions : [
+          {
+            versionNumber: 1,
+            ingredients: this.state.ingredients,
+            instructions: this.state.instructions
+          }
+        ]
+      }
+    }
+
     fetch(url, {
       method: "POST",
-      body: JSON.stringify(this.state),
+      body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json'
       }
     })
     .then(response => response.json())
-    .then(json => console.log(json))
+    .then(() => this.props.history.push("/"))
     .catch(err => console.log(err));
+  }
+
+
+  handleInputChange = (event) => {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
+  addElement = (obj, propName) => {
+    let newArr = this.state[propName];
+    newArr.push(obj);
+    // if(propName === 'instructions') {
+    //   console.log('this should sort');
+    //   return newArr.sort((a, b) => parseInt(a.stepNumber) > parseInt(b.stepNumber));
+    // }
+    this.setState({[propName]: newArr});
   }
 
   render() {
     return(
       <div>
-        <h1>Add dish</h1>
+        <h1>Add new dish</h1>
         <form>
-          <Input label="Dish name" type="text" />
-          <Input label="Ingredient name" type="text" />
-          <Input label="Ingredient quantity" type="text" />
-          <Input ariaLabel="Ingredient measurement" type="text" />
-          <Button title="Submit" onClick={this.submit} />
+          <Input 
+            label="Dish name" 
+            name="name"
+            value={this.state.name}
+            onChange={this.handleInputChange} />
+          <ListIngredients ingredients={this.state.ingredients} />
+          <AddIngredient addIngredient={this.addElement} />
+          <ListInstructions instructions={this.state.instructions} />
+          <AddInstruction addInstruction={this.addElement} />
+          <Button title="Submit" onClick={this.handleSubmit}/>
         </form>
       </div>
     )
   }
 }
 
-export default addDish;
+export default withRouter(addDish);

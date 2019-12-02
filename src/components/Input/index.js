@@ -1,17 +1,23 @@
 import React from 'react';
-
+import styles from './input.module.scss';
 
 const Input = (props) => {
 
-  const { label, ariaLabel, type, value, placeholder } = props;
+  const { label, ariaLabel, type, value, name, placeholder, onChange } = props;
 
   return (
-    <div>
+    <>
       {label &&
-        <label>{label}</label>
+        <label htmlFor={name}>{label}</label>
       }
-      <input aria-label={label ? label : ariaLabel} type={type} value={value} placeholder={placeholder} />
-    </div>
+      <input 
+        aria-label={label ? label : ariaLabel} 
+        type={type} 
+        value={value} 
+        name={name} 
+        placeholder={placeholder} 
+        onChange={onChange} />
+    </>
   )
 }
 
