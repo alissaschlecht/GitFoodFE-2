@@ -1,10 +1,13 @@
 import React from 'react';
+import { Button as SUButton }  from 'semantic-ui-react';
 import styles from './button.module.scss';
 
 const Button = (props) => {
+
   const { title, onClick } = props;
+  
   return (
-    <button className={styles.button} type="button" onClick={onClick}>{title}</button>
+    <SUButton onClick={onClick} className={styles.button}>{title}</SUButton>
   )
 }
 

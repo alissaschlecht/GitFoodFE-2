@@ -1,15 +1,15 @@
 import React from 'react';
 import './search.module.scss';
+import FormField from '../../components/FormField';
 
 const Search = (props) => {
   
-  const { title, type, onChange } = props;
+  const { title, onChange } = props;
 
   return (
     <div>
       <label>{title}</label>
-      <input 
-        type={type} 
+      <FormField 
         onChange={onChange} />
     </div>
   )

@@ -1,23 +1,19 @@
 import React from 'react';
 import styles from './input.module.scss';
+import { Input as SUInput } from 'semantic-ui-react'
 
 const Input = (props) => {
 
-  const { label, ariaLabel, type, value, name, placeholder, onChange } = props;
+  const { ariaLabel, type, value, name, placeholder, onChange } = props;
 
   return (
-    <>
-      {label &&
-        <label htmlFor={name}>{label}</label>
-      }
-      <input 
-        aria-label={label ? label : ariaLabel} 
+      <SUInput 
+        aria-label={ariaLabel} 
         type={type} 
         value={value} 
         name={name} 
         placeholder={placeholder} 
         onChange={onChange} />
-    </>
   )
 }
 

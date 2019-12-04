@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Input from '../../../../components/Input';
+import { Grid } from 'semantic-ui-react'
+import FormField from '../../../../components/FormField';
 import Button from '../../../../components/Button';
 
 
@@ -22,8 +23,11 @@ class AddIngredient extends Component {
     this.setState({ [field]: value })
   }
 
-  addIngredient = () => {
+  addIngredient = (event) => {
+    event.preventDefault();
+
     const ingredient = this.state;
+
     this.props.addIngredient(ingredient, 'ingredients');
     this.setState({ name: '', quantity: '', measurement: ''});
   }
@@ -31,22 +35,33 @@ class AddIngredient extends Component {
   render() {
     return(
       <div className="form-row">
-        <Input 
-          label="Ingredient name" 
-          name="name" 
-          value={this.state.name}
-          onChange={this.onChange} />
-        <Input 
-          label="Ingredient quantity" 
-          name="quantity" 
-          value={this.state.quantity}
-          onChange={this.onChange}/>
-        <Input 
-          label="Ingredient measurement" 
-          name="measurement" 
-          value={this.state.measurement}
-          onChange={this.onChange}/>
-        <Button title="add ingredient" onClick={this.addIngredient} />
+      <Grid doubling stackable columns={4}>
+        <Grid.Column>
+          <FormField
+            label="Ingredient name" 
+            name="name" 
+            value={this.state.name}
+            onChange={this.onChange} />
+        </Grid.Column>
+        <Grid.Column>
+          <FormField 
+            label="Ingredient quantity" 
+            name="quantity" 
+            value={this.state.quantity}
+            onChange={this.onChange}/>
+        </Grid.Column>
+        <Grid.Column>
+          <FormField 
+            label="Ingredient measurement" 
+            name="measurement" 
+            value={this.state.measurement}
+            onChange={this.onChange}/>
+          </Grid.Column>
+          <Grid.Column>
+            <Button title="add ingredient" onClick={this.addIngredient} />
+          </Grid.Column>
+        </Grid>
+        
       </div>
     )
   }

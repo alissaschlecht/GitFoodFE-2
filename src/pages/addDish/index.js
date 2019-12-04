@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Input from '../../components/Input';
+import FormField from '../../components/FormField';
 import Button from '../../components/Button';
 import ListIngredients from './components/ListIngredients';
 import ListInstructions from './components/ListInstructions';
@@ -60,6 +60,7 @@ class addDish extends Component {
 
   addElement = (obj, propName) => {
     let newArr = this.state[propName];
+    console.log('newArr', newArr);
     newArr.push(obj);
     // if(propName === 'instructions') {
     //   console.log('this should sort');
@@ -69,11 +70,12 @@ class addDish extends Component {
   }
 
   render() {
+    console.log(this.state);
     return(
       <div>
         <h1>Add new dish</h1>
         <form>
-          <Input 
+          <FormField
             label="Dish name" 
             name="name"
             value={this.state.name}

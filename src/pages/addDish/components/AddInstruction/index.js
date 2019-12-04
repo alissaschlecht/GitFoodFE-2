@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import Input from '../../../../components/Input';
+import FormField from '../../../../components/FormField';
 import Button from '../../../../components/Button';
 
 class AddInstruction extends Component {
   constructor(props) {
     super(props);
     this.state={
-      description: '',
-      stepNumber: ''
+      description: ''
     }
   }
 
@@ -19,25 +18,20 @@ class AddInstruction extends Component {
     this.setState({ [name]: value });
   }
 
-  addInstruction = () => {
+  addInstruction = (event) => {
+    event.preventDefault();
     const instruction = this.state;
     this.props.addInstruction(instruction, 'instructions');
-    this.setState({ description: '', stepNumber: '' });
+    this.setState({ description: '' });
   }
 
   render(){
     return(
       <div>
-        <Input 
+        <FormField 
           label="Description" 
           name="description" 
           value={this.state.description}
-          onChange={this.onChange} />
-        <Input 
-          label="Step number" 
-          name="stepNumber" 
-          type="number"
-          value={this.state.stepNumber}
           onChange={this.onChange} />
         <Button title="Add instruction" onClick={this.addInstruction} />
       </div>
