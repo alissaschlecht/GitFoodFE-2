@@ -35,33 +35,23 @@ class AddIngredient extends Component {
   render() {
     return(
       <div className="form-row">
-      <Grid doubling stackable columns={4}>
-        <Grid.Column>
-          <FormField
-            label="Ingredient name" 
-            name="name" 
-            value={this.state.name}
-            onChange={this.onChange} />
-        </Grid.Column>
-        <Grid.Column>
-          <FormField 
-            label="Ingredient quantity" 
-            name="quantity" 
-            value={this.state.quantity}
-            onChange={this.onChange}/>
-        </Grid.Column>
-        <Grid.Column>
-          <FormField 
-            label="Ingredient measurement" 
-            name="measurement" 
-            value={this.state.measurement}
-            onChange={this.onChange}/>
-          </Grid.Column>
-          <Grid.Column>
-            <Button title="add ingredient" onClick={this.addIngredient} />
-          </Grid.Column>
-        </Grid>
-        
+        <FormField
+          label="Ingredient name" 
+          name="name" 
+          value={this.state.name}
+          onChange={this.onChange} />
+
+        <FormField 
+          label="Ingredient quantity" 
+          name="quantity" 
+          value={this.state.quantity}
+          onChange={this.onChange}/>
+        <FormField 
+          label="Ingredient measurement" 
+          name="measurement" 
+          value={this.state.measurement}
+          onChange={this.onChange}/>
+          <Button title="add ingredient" onClick={this.addIngredient} />
       </div>
     )
   }

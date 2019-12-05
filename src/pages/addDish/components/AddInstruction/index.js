@@ -27,7 +27,7 @@ class AddInstruction extends Component {
 
   render(){
     return(
-      <div>
+      <div className="form-row">
         <FormField 
           label="Description" 
           name="description" 

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import Button from '../../components/Button';
+import FormField from '../../components/FormField';
 import Search from '../../components/Search';
 import List from './components/List';
-import Modal from 'react-modal';
+// import Modal from 'react-modal';
+import { Modal, Header } from 'semantic-ui-react';
 import styles from './listDishes.module.scss';
 
 const url = "https://git-food-api.herokuapp.com/api/dishes";
-
-Modal.setAppElement('#root');
 
 class ListDishes extends Component {
   constructor(props) {
@@ -33,9 +33,7 @@ class ListDishes extends Component {
     .then(json => this.setState({ dishes: json.dishes, isLoading: false }));
   }
 
-  searchDishes = (e) => {
-    this.setState({ searchValue: e.target.value.toLowerCase() });
-  }
+  searchDishes = (e) => this.setState({ searchValue: e.target.value.toLowerCase() })
 
   deleteDish = id => {
     fetch(`${url}/${id}`, {
@@ -48,17 +46,10 @@ class ListDishes extends Component {
     })
   }
 
-  openModal = dish => {
-    this.setState({ modalIsOpen: true, editDish: dish });
-  }
+  openModal = dish => this.setState({ modalIsOpen: true, editDish: dish })
+  closeModal = () => this.setState({ modalIsOpen: false })
 
-  editDishName = (e) => {
-    this.setState({ newDishname: e.target.value })
-  }
-
-  closeModal = () => {
-    this.setState({ modalIsOpen: false });
-  }
+  editDishName = (e) => this.setState({ newDishname: e.target.value })
 
   updateDishName = () => {
 
@@ -85,7 +76,7 @@ class ListDishes extends Component {
     const { dishes, searchValue, isLoading, editDish, newDishname } = this.state;
 
     return(
-      <div className={styles['list-dishes']}>
+      <div className={`container ${styles['list-dishes']}`}>
 
         <div className={styles['list-dishes-header']}>
           <h2>Alissa's Dishes</h2>
@@ -110,26 +101,36 @@ class ListDishes extends Component {
         }
 
         <Modal
-          isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal}
-          style={this.customStyles}
-          contentLabel="Example Modal"
+          open={this.state.modalIsOpen}
+          onClose={this.closeModal}
+          size='small'
+          // isOpen={this.state.modalIsOpen}
+          // onAfterOpen={this.afterOpenModal}
+          // onRequestClose={this.closeModal}
+          // style={this.customStyles}
+          // contentLabel="Example Modal"
         >
-          <h2>Edit dish name</h2>
-          <form>
-            <input 
-              type="text" 
-              placeholder={editDish.name} 
-              value={newDishname} 
-              onChange={this.editDishName} />
+          <Header content='Edit dish name' />
+          <Modal.Content>
+            <form>
+              <FormField
+                label={`New name for ${editDish.name}`} 
+                type="text" 
+                placeholder={editDish.name} 
+                value={newDishname} 
+                onChange={this.editDishName} />
+
+            </form>
+          </Modal.Content>
+          <Modal.Actions>
             <Button 
-              title="Close" 
+              title="Cancel" 
               onClick={this.closeModal} />
             <Button 
               title="Save" 
               onClick={this.updateDishName} />
-          </form>
+          </Modal.Actions>
+
         </Modal>
 
       </div>

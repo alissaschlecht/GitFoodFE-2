@@ -8,7 +8,7 @@ const FormField = (props) => {
   const { label, ariaLabel, type, value, name, placeholder, onChange } = props;
 
   return (
-    <SUForm.Field>
+    <SUForm.Field className={styles.field}>
       <label className={styles.label}>{ label }</label>
       <Input 
         ariaLabel={ariaLabel} 

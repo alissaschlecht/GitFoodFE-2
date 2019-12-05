@@ -6,7 +6,7 @@ import ListInstructions from './components/ListInstructions';
 import AddIngredient from './components/AddIngredient';
 import AddInstruction from './components/AddInstruction';
 import { withRouter } from 'react-router-dom';
-// import styles from './addDish.module.scss';
+import styles from './addDish.module.scss';
 
 const url = "https://git-food-api.herokuapp.com/api/dishes";
 
@@ -70,11 +70,10 @@ class addDish extends Component {
   }
 
   render() {
-    console.log(this.state);
     return(
       <div>
         <h1>Add new dish</h1>
-        <form>
+        <form className={styles.form}>
           <FormField
             label="Dish name" 
             name="name"
