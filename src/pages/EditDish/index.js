@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import FormField from '../../components/FormField';
 import Button from '../../components/Button';
@@ -12,23 +14,52 @@ const url = "https://git-food-api.herokuapp.com/api/dishes";
 class EditDish extends Component {
   constructor(props) {
     super(props);
+    console.log(this.props);
     const data = this.props.location.state;
     this.state = {
+      id: data.id,
       name: data.name,
-      ingredients: data.versions[0].ingredients,
-      instructions: data.versions[0].instructions,
+      ingredients: data.versions[data.versions.length - 1].ingredients,
+      instructions: data.versions[data.versions.length - 1].instructions,
+      notes: data.versions[data.versions.length - 1].notes
     }
   }
 
-  updateField = () => {
-    console.log('hahah');
+  updateFieldArray = (value, source, index) => {
+
+      let newValue = this.state[source];
+      let newField = { ...this.state[source][index]};
+      newField.name = value;
+      newValue[index] = newField;
+
+    this.setState({ [source]: newValue });
+
+  }
+
+  updateField = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+
+    this.setState({ [name]: value });
   }
   
-  updateDish = () => {
+  updateDish = (event) => {
+    event.preventDefault();
+    console.log('running');
+    const dishData = { 
+      "dish": {
+        "name": this.state.name,
+        "versions": [
+          {
+            "ingredients": this.state.ingredients,
+            "instructions": this.state.instructions,
+            "notes": this.state.notes
+          }
+        ] 
+      }
+    }
 
-    const dishData = { "dish": this.state.dish }
-
-    fetch(`${url}/${this.state.dish.id}`, {
+    fetch(`${url}/${this.state.id}`, {
       method: "PUT",
       body: JSON.stringify(dishData),
       headers: {
@@ -42,16 +73,35 @@ class EditDish extends Component {
 
   render() {
 
-    console.log('state', this.state);
     return(
       <Container>
         <Form>
-          <FormField label="name" />
-          <FormField label="instruction" />
-          <IngredientList ingredients={this.state.ingredients} onChange={this.updateField}/>
-          <InstructionList instructions={this.state.instructions} onChange={this.updateField} />
+          <Row>
+            <Col lg={4}>
+              <FormField label="name" name="name" value={this.state.name} onChange={this.updateField}/>
+            </Col>
+          </Row>
+          <h2>Ingredients</h2>
+          <IngredientList 
+            ingredients={this.state.ingredients} 
+            onChange={this.updateFieldArray}/>
+          <h2>Instructions</h2>
+          <InstructionList 
+            instructions={this.state.instructions} 
+            onChange={this.updateFieldArray} />
+          <h2>Notes</h2>
+          <Row>
+            <Col>
+              <FormField  
+                as="textarea"
+                rows="3" 
+                name="notes" 
+                value={this.state.notes} 
+                onChange={this.updateField}/>
+            </Col>
+          </Row>
         </Form>
-        <Button title="Save" variant="primary" onChange={this.updateDish} />
+        <Button title="Save" variant="primary" onClick={this.updateDish} />
       </Container>
     )
   }

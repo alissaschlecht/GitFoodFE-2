@@ -10,6 +10,7 @@ const InstructionList = (props) => {
       {instructions.map((instruction, index) =>
         <Instruction 
           key={index} 
+          index={index}
           stepNumber={instruction.stepNumber} 
           value={instruction.description} 
           onChange={onChange} />
