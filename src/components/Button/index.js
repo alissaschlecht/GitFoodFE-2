@@ -1,13 +1,17 @@
 import React from 'react';
-import { Button as SUButton }  from 'semantic-ui-react';
+import { Button as BSButton } from 'react-bootstrap';
 import styles from './button.module.scss';
 
 const Button = (props) => {
 
-  const { title, onClick } = props;
+  const { title, onClick, variant = 'contained' } = props;
   
   return (
-    <SUButton onClick={onClick} className={styles.button}>{title}</SUButton>
+    <BSButton 
+      onClick={onClick} 
+      className={styles.button}
+      variant={variant}
+      >{title}</BSButton>
   )
 }
 

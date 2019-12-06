@@ -1,14 +1,14 @@
 import React from 'react';
-import styles from './input.module.scss';
-import { Input as SUInput } from 'semantic-ui-react'
+// import styles from './input.module.scss';
+import Form from 'react-bootstrap/Form';
 
 const Input = (props) => {
 
-  const { ariaLabel, type, value, name, placeholder, onChange } = props;
+  const { label, type, value, name, placeholder, onChange } = props;
 
   return (
-      <SUInput 
-        aria-label={ariaLabel} 
+      <Form.Control 
+        label={label} 
         type={type} 
         value={value} 
         name={name} 

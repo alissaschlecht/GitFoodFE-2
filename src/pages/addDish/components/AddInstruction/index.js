@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FormField from '../../../../components/FormField';
+import Input from '../../../../components/Input';
 import Button from '../../../../components/Button';
 
 class AddInstruction extends Component {
@@ -28,7 +28,7 @@ class AddInstruction extends Component {
   render(){
     return(
       <div className="form-row">
-        <FormField 
+        <Input 
           label="Description" 
           name="description" 
           value={this.state.description}

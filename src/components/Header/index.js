@@ -13,7 +13,7 @@ const Header = () => {
         </Link>
         <h3>GitFood</h3>
       </div>
-      <Button title="Log out" />
+      <Button variant="primary" title="Log out" />
     </div>
   )
 }

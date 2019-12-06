@@ -1,8 +1,6 @@
 @import '../../utils/utils.scss';
 
 .list-dishes {
-  // max-width: 800px;
-  // margin: 0 auto;
 
   .list-dishes-header {
     display: flex;
@@ -12,21 +10,5 @@
   }
 
   .list-labels, .list-item {
-    display: flex;
-    justify-content: space-between;
-    h5, p, div {
-      width: calc(100% / 3);
-    }
-  }
-
-  .dish-wrapper {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    text-align: center;
-    justify-content: center;
-    button, img {
-      align-self: center;
-    }
   }
 }

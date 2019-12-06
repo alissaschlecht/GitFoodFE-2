@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './formField.module.scss';
-import { Form as SUForm } from 'semantic-ui-react'
+import Form from 'react-bootstrap/Form';
 import Input from '../Input';
 
 const FormField = (props) => {
@@ -8,8 +8,8 @@ const FormField = (props) => {
   const { label, ariaLabel, type, value, name, placeholder, onChange } = props;
 
   return (
-    <SUForm.Field className={styles.field}>
-      <label className={styles.label}>{ label }</label>
+    <Form.Group className={styles.field}>
+      <Form.Label>{label}</Form.Label>
       <Input 
         ariaLabel={ariaLabel} 
         type={type} 
@@ -17,7 +17,7 @@ const FormField = (props) => {
         name={name} 
         placeHolder={placeholder} 
         onChange={onChange}/>
-    </SUForm.Field>
+    </Form.Group>
   )
 }
 

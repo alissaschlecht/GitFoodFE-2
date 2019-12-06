@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Grid } from 'semantic-ui-react'
-import FormField from '../../../../components/FormField';
+import Input from '../../../../components/Input';
 import Button from '../../../../components/Button';
 
 
@@ -35,18 +34,18 @@ class AddIngredient extends Component {
   render() {
     return(
       <div className="form-row">
-        <FormField
+        <Input
           label="Ingredient name" 
           name="name" 
           value={this.state.name}
           onChange={this.onChange} />
 
-        <FormField 
+        <Input 
           label="Ingredient quantity" 
           name="quantity" 
           value={this.state.quantity}
           onChange={this.onChange}/>
-        <FormField 
+        <Input 
           label="Ingredient measurement" 
           name="measurement" 
           value={this.state.measurement}

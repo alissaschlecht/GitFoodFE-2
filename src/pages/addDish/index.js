@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FormField from '../../components/FormField';
+import Input from '../../components/Input';
 import Button from '../../components/Button';
 import ListIngredients from './components/ListIngredients';
 import ListInstructions from './components/ListInstructions';
@@ -74,7 +74,7 @@ class addDish extends Component {
       <div>
         <h1>Add new dish</h1>
         <form className={styles.form}>
-          <FormField
+          <Input
             label="Dish name" 
             name="name"
             value={this.state.name}

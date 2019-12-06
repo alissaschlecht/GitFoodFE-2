@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import ListDishes from './pages/ListDishes';
 import AddDish from './pages/AddDish';
+import EditDish from './pages/EditDish';
 import Dish from './pages/Dish';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -19,6 +20,7 @@ function App() {
         <Route exact path="/" component={ListDishes} />
         <Route exact path="/add-dish" component={AddDish} />
         <Route exact path="/dish/:id"component={Dish} />
+        <Route exact path="/dish/:id/edit" component={EditDish} />
       </Switch>
       <Footer/>
     </Router>

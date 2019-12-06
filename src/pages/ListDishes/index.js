@@ -4,8 +4,7 @@ import Button from '../../components/Button';
 import FormField from '../../components/FormField';
 import Search from '../../components/Search';
 import List from './components/List';
-// import Modal from 'react-modal';
-import { Modal, Header } from 'semantic-ui-react';
+import Modal from 'react-bootstrap/Modal';
 import styles from './listDishes.module.scss';
 
 const url = "https://git-food-api.herokuapp.com/api/dishes";
@@ -81,13 +80,13 @@ class ListDishes extends Component {
         <div className={styles['list-dishes-header']}>
           <h2>Alissa's Dishes</h2>
           <Link to="/add-dish">
-            <Button title="Add Dish" />
+            <Button variant="primary" title="Add Dish" />
           </Link>
         </div>
 
         <Search 
           type="text" 
-          title="Search" 
+          label="Search" 
           onChange={this.searchDishes} />
 
         { isLoading 
@@ -100,39 +99,28 @@ class ListDishes extends Component {
               : dishes.filter(dish => dish.name.toLowerCase().includes(searchValue))} />
         }
 
-        <Modal
-          open={this.state.modalIsOpen}
-          onClose={this.closeModal}
-          size='small'
-          // isOpen={this.state.modalIsOpen}
-          // onAfterOpen={this.afterOpenModal}
-          // onRequestClose={this.closeModal}
-          // style={this.customStyles}
-          // contentLabel="Example Modal"
-        >
-          <Header content='Edit dish name' />
-          <Modal.Content>
-            <form>
-              <FormField
-                label={`New name for ${editDish.name}`} 
-                type="text" 
-                placeholder={editDish.name} 
-                value={newDishname} 
-                onChange={this.editDishName} />
-
-            </form>
-          </Modal.Content>
-          <Modal.Actions>
+        <Modal show={this.state.modalIsOpen} onHide={this.closeModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Edit dish name</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <FormField
+              value={newDishname}
+              label={`Update ${editDish.name}`}
+              onChange={this.editDishName}
+            />
+          </Modal.Body>
+          <Modal.Footer>
             <Button 
-              title="Cancel" 
+              title="close" 
+              variant="secondary" 
               onClick={this.closeModal} />
             <Button 
-              title="Save" 
+              title="Save changes"
+              variant="primary" 
               onClick={this.updateDishName} />
-          </Modal.Actions>
-
+          </Modal.Footer>
         </Modal>
-
       </div>
     )
       

@@ -4,12 +4,12 @@ import FormField from '../../components/FormField';
 
 const Search = (props) => {
   
-  const { title, onChange } = props;
+  const { label, onChange } = props;
 
   return (
     <div>
-      <label>{title}</label>
-      <FormField 
+      <FormField
+        label={label}
         onChange={onChange} />
     </div>
   )
