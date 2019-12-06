@@ -5,14 +5,16 @@ import Input from '../Input';
 
 const FormField = (props) => {
 
-  const { label, ariaLabel, type, value, name, placeholder, onChange } = props;
+  const { label, ariaLabel, type, as, rows, value, name, placeholder, onChange } = props;
 
   return (
     <Form.Group className={styles.field}>
       <Form.Label>{label}</Form.Label>
       <Input 
         ariaLabel={ariaLabel} 
-        type={type} 
+        type={type}
+        as={as}
+        rows={rows} 
         value={value} 
         name={name} 
         placeHolder={placeholder} 

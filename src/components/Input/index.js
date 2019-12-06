@@ -4,16 +4,18 @@ import Form from 'react-bootstrap/Form';
 
 const Input = (props) => {
 
-  const { label, type, value, name, placeholder, onChange } = props;
+  const { label, type, as = 'input', rows = 1, value, name, placeholder, onChange } = props;
 
   return (
-      <Form.Control 
-        label={label} 
-        type={type} 
-        value={value} 
-        name={name} 
-        placeholder={placeholder} 
-        onChange={onChange} />
+    <Form.Control 
+      label={label} 
+      type={type}
+      as={as}
+      rows={rows} 
+      value={value} 
+      name={name} 
+      placeholder={placeholder} 
+      onChange={onChange} />
   )
 }
 
